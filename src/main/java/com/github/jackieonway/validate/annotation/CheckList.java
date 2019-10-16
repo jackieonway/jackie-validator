@@ -24,7 +24,7 @@ import com.github.jackieonway.validate.constraint.CheckListConstraint;
  */
 @Target({FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = {})
+@Constraint(validatedBy = {CheckListConstraint.class})
 public @interface CheckList {
 
    String[] params();
