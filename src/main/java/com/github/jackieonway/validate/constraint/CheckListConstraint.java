@@ -30,7 +30,7 @@ public class CheckListConstraint implements ConstraintValidator<CheckList, Strin
    public boolean isValid(String param, ConstraintValidatorContext context) {
       List<String> params = Arrays.asList(checkList.params());
       if (CollectionUtils.isEmpty(params)){
-         ValidMessageUtils.validMessage("params can not be null",context);
+         return ValidMessageUtils.returnMessage("params can not be null", context);
       }
       return params.contains(param);
    }
