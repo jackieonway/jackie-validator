@@ -8,8 +8,6 @@ package com.github.jackieonway.validate.annotation;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -24,7 +22,7 @@ import com.github.jackieonway.validate.constraint.CheckListConstraint;
  */
 @Target({FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = {})
+@Constraint(validatedBy = {CheckListConstraint.class})
 public @interface CheckList {
 
    String[] params();
