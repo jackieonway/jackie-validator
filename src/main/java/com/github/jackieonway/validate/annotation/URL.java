@@ -14,7 +14,7 @@ import java.lang.annotation.*;
  * @author Jackie
  * @version $id: URL.java v 0.1 2019-10-16 10:58 Jackie Exp $$
  */
-@Target({ElementType.FIELD,ElementType.PARAMETER})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = UrlConstraint.class)

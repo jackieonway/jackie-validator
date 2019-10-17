@@ -54,35 +54,25 @@ public class DateCompareConstraint implements ConstraintValidator<DateCompare,Ob
 		CONTEXT.setVariable(name.substring(0, 1).toLowerCase() + name.substring(1), o);
 		Date start = PARSER.parseExpression(startTime).getValue(CONTEXT,Date.class);
 		Date end = PARSER.parseExpression(endTime).getValue(CONTEXT,Date.class);
-		if (must) {
-			if (Objects.isNull(start)) {
-				constraintValidatorContext.disableDefaultConstraintViolation();
-				constraintValidatorContext.buildConstraintViolationWithTemplate("start time is null.").addConstraintViolation();
-				return false;
-			}
-			if (Objects.isNull(end)) {
-				constraintValidatorContext.disableDefaultConstraintViolation();
-				constraintValidatorContext.buildConstraintViolationWithTemplate("end time is null.").addConstraintViolation();
-				return false;
-			}
-		}else {
-			if (Objects.isNull(start) || Objects.isNull(end)) {
-				return true;
-			}
+		boolean startIsNull = Objects.isNull(start);
+		boolean endIsNull = Objects.isNull(end);
+		if (!must && (startIsNull || endIsNull)) {
+			return true;
+		}
+		if (startIsNull) {
+			return ValidMessageUtils.returnMessage("start time is null.", constraintValidatorContext);
+		}
+		if (endIsNull) {
+			return ValidMessageUtils.returnMessage("end time is null.", constraintValidatorContext);
 		}
 		if (lessThanNow){
 			if (start.after(new Date())) {
-				constraintValidatorContext.disableDefaultConstraintViolation();
-				constraintValidatorContext.buildConstraintViolationWithTemplate("start time is after than now.").addConstraintViolation();
-				return false;
+				return ValidMessageUtils.returnMessage("start time is after than now.", constraintValidatorContext);
 			}
 			if (end.after(new Date())) {
-				constraintValidatorContext.disableDefaultConstraintViolation();
-				constraintValidatorContext.buildConstraintViolationWithTemplate("end time is after than now.").addConstraintViolation();
-				return false;
+				return ValidMessageUtils.returnMessage("end time is after than now.", constraintValidatorContext);
 			}
 		}
 		return start.before(end);
-
 	}
 }

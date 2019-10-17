@@ -16,7 +16,7 @@ import java.lang.annotation.*;
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD,ElementType.PARAMETER})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Constraint(validatedBy = DateTimeSizeConstraint.class)
 public @interface DateTimeSize {
 

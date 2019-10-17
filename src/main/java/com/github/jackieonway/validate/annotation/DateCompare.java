@@ -1,16 +1,10 @@
-
 package com.github.jackieonway.validate.annotation;
 
 import com.github.jackieonway.validate.constraint.DateCompareConstraint;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import java.lang.annotation.*;
 
 /**
  * @author Jackie
@@ -21,31 +15,31 @@ import javax.validation.Payload;
 @Constraint(validatedBy = DateCompareConstraint.class)
 public @interface DateCompare {
 
-	String message() default "时间比较参数校验错误";
+    String message() default "时间比较参数校验错误";
 
-	/**
-	 *  是否必须
-	 */
-	boolean must() default false;
+    /**
+     * 是否必须
+     */
+    boolean must() default false;
 
-	String startTime();
+    String startTime();
 
-	String endTime();
+    String endTime();
 
-	Class<?>[] groups() default {};
+    Class<?>[] groups() default {};
 
-	/**
-	 *  是否大于现在时间
-	 */
-	boolean lessThanNow() default false;
+    /**
+     * 是否大于现在时间
+     */
+    boolean lessThanNow() default false;
 
-	Class<? extends Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 
 
-	@Target({ElementType.TYPE})
-	@Retention(RetentionPolicy.RUNTIME)
-	@Documented
-	public @interface List {
-		DateCompare[] value();
-	}
+    @Target({ElementType.TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    @interface List {
+        DateCompare[] value();
+    }
 }

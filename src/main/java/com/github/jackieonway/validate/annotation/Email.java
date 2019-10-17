@@ -15,7 +15,7 @@ import java.lang.annotation.*;
  * @author Jackie
  * @version $id: Email.java v 0.1 2019-10-16 11:13 Jackie Exp $$
  */
-@Target({ElementType.FIELD,ElementType.PARAMETER})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = EmailConstraint.class)
