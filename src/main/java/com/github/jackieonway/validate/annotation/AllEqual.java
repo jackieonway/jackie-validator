@@ -9,7 +9,6 @@ import com.github.jackieonway.validate.constraint.AllEqualConstraint;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
-import java.util.Objects;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
