@@ -4,33 +4,27 @@
  */
 package com.github.jackieonway.validate.annotation;
 
-import com.github.jackieonway.validate.constraint.DateTimeSizeConstraint;
+import com.github.jackieonway.validate.constraint.AllEqualConstraint;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
 import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * @author Jackie
- * @version $id: DateTimeSize.java v 0.1 2019-10-12 15:54 Jackie Exp $$
+ * @version $id: AllEqual.java v 0.1 2019-10-21 9:17 Jackie Exp $$
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
-@Constraint(validatedBy = DateTimeSizeConstraint.class)
-public @interface DateTimeSize {
+@Target({TYPE})
+@Retention(RUNTIME)
+@Constraint(validatedBy = AllEqualConstraint.class)
+public @interface AllEqual {
 
-    String start();
+    String[] value();
 
-    String end();
-
-    String message() default "DateTime Validate Error";
-
-    String pattern() default "yyyy-MM-dd HH:mm:ss";
+    String message() default "param value is not equal";
 
     Class<?>[] groups() default {};
 

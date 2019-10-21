@@ -5,7 +5,8 @@
 package com.github.jackieonway.validate.annotation;
 
 
-import com.github.jackieonway.validate.constraint.CheckListConstraint;
+
+import com.github.jackieonway.validate.constraint.RangesConstraint;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -17,16 +18,16 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * @author Jackie
- * @version $id: CheckList.java v 0.1 2019-10-10 10:48 Jackie Exp $$
+ * @version $id: Ranges.java v 0.1 2019-10-10 10:48 Jackie Exp $$
  */
 @Target({FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = {CheckListConstraint.class})
-public @interface CheckList {
+@Constraint(validatedBy = {RangesConstraint.class})
+public @interface Ranges {
 
     String[] params();
 
-    String message() default "Check List Validate Error";
+    String message() default "Ranges Validate Error";
 
     Class<?>[] groups() default {};
 

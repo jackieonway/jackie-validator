@@ -4,11 +4,13 @@
  */
 package com.github.jackieonway.validate.annotation;
 
-import com.github.jackieonway.validate.constraint.DateTimeSizeConstraint;
+import com.github.jackieonway.validate.constraint.HasNotNullConstraint;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
@@ -16,30 +18,26 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * @author Jackie
- * @version $id: DateTimeSize.java v 0.1 2019-10-12 15:54 Jackie Exp $$
+ * @version $id: HasNotNull.java v 0.1 2019-10-21 14:09 Jackie Exp $$
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
-@Constraint(validatedBy = DateTimeSizeConstraint.class)
-public @interface DateTimeSize {
+@Target({TYPE})
+@Retention(RUNTIME)
+@Constraint(validatedBy = HasNotNullConstraint.class)
+public @interface HasNotNull {
 
-    String start();
+    String[] value();
 
-    String end();
-
-    String message() default "DateTime Validate Error";
-
-    String pattern() default "yyyy-MM-dd HH:mm:ss";
+    String message() default "all params are null";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
+
     @Target({FIELD, METHOD, PARAMETER, ANNOTATION_TYPE})
     @Retention(RUNTIME)
     @Documented
     @interface List {
-        AllEqual[] value();
+        HasNotNull[] value();
     }
 }
