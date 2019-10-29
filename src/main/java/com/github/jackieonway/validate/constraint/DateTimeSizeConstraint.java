@@ -70,7 +70,7 @@ private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeSizeConstra
 
       } catch (ParseException e) {
          LOGGER.error("Jackie Validator Error : {}" , e.getMessage() , e);
-         throw new ValidatedException(e.getMessage());
+         throw new ValidatedException(e);
       }
       return true;
    }

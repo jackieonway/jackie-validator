@@ -13,4 +13,8 @@ public class ValidatedException extends RuntimeException {
     public ValidatedException(String message) {
         super(message);
     }
+
+    public ValidatedException(Throwable e){
+        super(e);
+    }
 }
