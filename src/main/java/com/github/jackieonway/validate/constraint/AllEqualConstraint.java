@@ -5,8 +5,6 @@
 package com.github.jackieonway.validate.constraint;
 
 import com.github.jackieonway.validate.annotation.AllEqual;
-import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import javax.validation.ConstraintValidator;
@@ -21,32 +19,31 @@ import java.util.Objects;
  */
 public class AllEqualConstraint implements ConstraintValidator<AllEqual, Object> {
 
-   private List<String> values;
+    private static final StandardEvaluationContext CONTEXT = new StandardEvaluationContext();
+    private List<String> values;
 
-   private static final StandardEvaluationContext CONTEXT = new StandardEvaluationContext();
+    @Override
+    public void initialize(AllEqual constraint) {
+        this.values = Arrays.asList(constraint.value());
+    }
 
-   @Override
-   public void initialize(AllEqual constraint) {
-      this.values = Arrays.asList(constraint.value());
-   }
-
-   @Override
-   public boolean isValid(Object object, ConstraintValidatorContext context) {
-      StandardEvaluationContextUtil.convertContext(object,CONTEXT,context);
-      Object temp = null;
-      for (String value : values) {
-         Object o = CONTEXT.lookupVariable(value);
-         if (Objects.nonNull(temp)){
-            if (Objects.isNull(o)){
-               continue;
+    @Override
+    public boolean isValid(Object object, ConstraintValidatorContext context) {
+        StandardEvaluationContextUtil.convertContext(object, CONTEXT, context);
+        Object temp = null;
+        for (String value : values) {
+            Object o = CONTEXT.lookupVariable(value);
+            if (Objects.nonNull(temp)) {
+                if (Objects.isNull(o)) {
+                    continue;
+                }
+                if (!Objects.deepEquals(temp, o)) {
+                    return false;
+                }
             }
-            if (!Objects.deepEquals(temp, o)){
-               return false;
-            }
-         }
-         temp = o;
-      }
-      return true;
-   }
+            temp = o;
+        }
+        return true;
+    }
 
 }

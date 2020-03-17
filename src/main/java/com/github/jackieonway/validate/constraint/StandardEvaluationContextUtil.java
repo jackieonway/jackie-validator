@@ -16,16 +16,17 @@ import java.util.Arrays;
 public class StandardEvaluationContextUtil {
 
     /**
-     * 转化Object 对象为 StandardEvaluationContext 对象
-     * @param object 待转化对象
-     * @param context 转化后上下文对象
-     * @param validatorContext 校验上下文
-     * @author  Jackie
-     * @since 1.0
+     * Convert Object to {@link  org.springframework.expression.spel.support.StandardEvaluationContext}
+     *
+     * @param object           Object to be converted
+     * @param context          Transformed Context Object
+     * @param validatorContext context
+     * @author Jackie
      * @see StandardEvaluationContextUtil
+     * @since 1.0
      */
     public static void convertContext(Object object, StandardEvaluationContext context,
-                                      ConstraintValidatorContext validatorContext){
+                                      ConstraintValidatorContext validatorContext) {
         Class<?> aClass = object.getClass();
         Arrays.stream(aClass.getDeclaredFields()).forEach(m -> {
             m.setAccessible(true);
@@ -33,7 +34,7 @@ public class StandardEvaluationContextUtil {
                 Object o = m.get(object);
                 context.setVariable(m.getName(), o);
             } catch (IllegalAccessException e) {
-                ValidMessageUtils.validMessage(e.toString(),validatorContext);
+                ValidMessageUtils.validMessage(e.toString(), validatorContext);
             }
         });
     }

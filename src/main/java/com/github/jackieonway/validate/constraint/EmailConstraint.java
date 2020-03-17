@@ -17,17 +17,18 @@ import java.util.regex.Pattern;
  */
 public class EmailConstraint implements ConstraintValidator<Email, String> {
 
-   private static final String REGEX = "^[a-zA-Z0-9\\-\\_\\#\\$\\%\\^\\&\\*\\(\\)\\?]+\\@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$";
-   @Override
-   public void initialize(Email constraint) {
-   }
+    private static final String REGEX = "^[a-zA-Z0-9\\-\\_\\#\\$\\%\\^\\&\\*\\(\\)\\?]+\\@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$";
 
-   @Override
-   public boolean isValid(String email, ConstraintValidatorContext context) {
-      if (StringUtils.isBlank(email)){
-         return true;
-      }
-      Pattern pattern = Pattern.compile(REGEX);
-      return pattern.matcher(email).matches();
-   }
+    @Override
+    public void initialize(Email constraint) {
+    }
+
+    @Override
+    public boolean isValid(String email, ConstraintValidatorContext context) {
+        if (StringUtils.isBlank(email)) {
+            return true;
+        }
+        Pattern pattern = Pattern.compile(REGEX);
+        return pattern.matcher(email).matches();
+    }
 }

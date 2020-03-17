@@ -5,7 +5,6 @@
 package com.github.jackieonway.validate.annotation;
 
 
-
 import com.github.jackieonway.validate.constraint.RangesConstraint;
 
 import javax.validation.Constraint;
@@ -17,6 +16,8 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * Value range of the validation field
+ *
  * @author Jackie
  * @version $id: Ranges.java v 0.1 2019-10-10 10:48 Jackie Exp $$
  */

@@ -8,13 +8,17 @@ import com.github.jackieonway.validate.constraint.UrlConstraint;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * Verify URL
+ *
  * @author Jackie
  * @version $id: URL.java v 0.1 2019-10-16 10:58 Jackie Exp $$
  */

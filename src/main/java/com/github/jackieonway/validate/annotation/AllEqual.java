@@ -8,12 +8,16 @@ import com.github.jackieonway.validate.constraint.AllEqualConstraint;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.*;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * Check if all parameters are equal
+ *
  * @author Jackie
  * @version $id: AllEqual.java v 0.1 2019-10-21 9:17 Jackie Exp $$
  */

@@ -7,6 +7,8 @@ import javax.validation.Payload;
 import java.lang.annotation.*;
 
 /**
+ * 开始时间与结束时间比较,
+ *
  * @author Jackie
  * @version \$Id: DateCompare.java, v 0.1 2019-10-13 14:26 Jackie Exp $$
  */
@@ -15,23 +17,29 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = DateCompareConstraint.class)
 public @interface DateCompare {
 
-    String message() default "时间比较参数校验错误";
+    String message() default "Time comparison parameter check error";
 
     /**
-     * 是否必须
+     * Is it necessary
      */
     boolean must() default false;
 
+    /**
+     * Start time field, field starts with <i> # </i>
+     */
     String startTime();
 
+    /**
+     * End time field, field starts with <i> # </i>
+     */
     String endTime();
 
     Class<?>[] groups() default {};
 
     /**
-     * 是否大于现在时间
+     * Whether it is less than or equal to the current time
      */
-    boolean lessThanNow() default false;
+    boolean lessOrEqualThanNow() default false;
 
     Class<? extends Payload>[] payload() default {};
 
