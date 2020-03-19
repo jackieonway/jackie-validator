@@ -10,9 +10,6 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 /**
  * Check if the time is within the start time and end time
  *
@@ -37,8 +34,8 @@ public @interface DateTimeSize {
 
     Class<? extends Payload>[] payload() default {};
 
-    @Target({FIELD, METHOD, PARAMETER, ANNOTATION_TYPE})
-    @Retention(RUNTIME)
+    @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface List {
         AllEqual[] value();

@@ -35,11 +35,12 @@ public class DateTimeSizeConstraint implements ConstraintValidator<DateTimeSize,
     public boolean isValid(Object datetime, ConstraintValidatorContext context) {
         String start = dateTimeSize.start();
         String end = dateTimeSize.end();
+        String className = DateTimeSize.class.getName();
         if (StringUtils.isBlank(start)) {
-            ValidMessageUtils.validMessage("@DateTimeSize startTime can not be null", context);
+            ValidMessageUtils.validMessage(className + ".startTime can not be null", context);
         }
         if (StringUtils.isBlank(end)) {
-            ValidMessageUtils.validMessage("@DateTimeSize endTime can not be null", context);
+            ValidMessageUtils.validMessage(className + ".endTime can not be null", context);
         }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateTimeSize.pattern());
         try {
@@ -49,7 +50,7 @@ public class DateTimeSizeConstraint implements ConstraintValidator<DateTimeSize,
             if (datetime instanceof String) {
                 if (((String) datetime).trim().length() != dateTimeSize.pattern().length()) {
                     ValidMessageUtils.validMessage(
-                            String.format("@DateTimeSize param \"pattern\" maybe is \"%s\"", dateTimeSize.pattern()), context);
+                            String.format(className + "'s param \"pattern\" maybe is \"%s\"", dateTimeSize.pattern()), context);
                     return false;
                 }
                 date = simpleDateFormat.parse(datetime.toString());
@@ -58,7 +59,7 @@ public class DateTimeSizeConstraint implements ConstraintValidator<DateTimeSize,
             else if (datetime instanceof Date) {
                 date = (Date) datetime;
             } else {
-                ValidMessageUtils.validMessage("date time can not parse", context);
+                ValidMessageUtils.validMessage(className + "date time can not parse", context);
                 return false;
             }
             if (date.before(startDate)) {

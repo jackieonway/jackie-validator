@@ -14,8 +14,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.ElementType;
 
 /**
  * Check mailbox
@@ -23,7 +22,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @author Jackie
  * @version $id: Email.java v 0.1 2019-10-16 11:13 Jackie Exp $$
  */
-@Target({FIELD, PARAMETER})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = EmailConstraint.class)
@@ -34,8 +33,8 @@ public @interface Email {
 
     Class<? extends Payload>[] payload() default {};
 
-    @Target({FIELD, METHOD, PARAMETER, ANNOTATION_TYPE})
-    @Retention(RUNTIME)
+    @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface List {
         AllEqual[] value();

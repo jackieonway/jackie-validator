@@ -51,21 +51,23 @@ public class DateCompareConstraint implements ConstraintValidator<DateCompare, O
         Date end = PARSER.parseExpression(endTime).getValue(CONTEXT, Date.class);
         boolean startIsNull = Objects.isNull(start);
         boolean endIsNull = Objects.isNull(end);
-        if (!must && (startIsNull || endIsNull)) {
+        boolean falg = !must && (startIsNull || endIsNull);
+        if (falg) {
             return true;
         }
+        String className = DateCompare.class.getName();
         if (startIsNull) {
-            return ValidMessageUtils.returnMessage("start time is null.", constraintValidatorContext);
+            return ValidMessageUtils.returnMessage(className +".startTime is null.", constraintValidatorContext);
         }
         if (endIsNull) {
-            return ValidMessageUtils.returnMessage("end time is null.", constraintValidatorContext);
+            return ValidMessageUtils.returnMessage( className +".endTime is null.", constraintValidatorContext);
         }
         if (lessOrEqualThanNow) {
             if (start.after(new Date())) {
-                return ValidMessageUtils.returnMessage("start time is after than now.", constraintValidatorContext);
+                return ValidMessageUtils.returnMessage(className +".startTime is after than now.", constraintValidatorContext);
             }
             if (end.after(new Date())) {
-                return ValidMessageUtils.returnMessage("end time is after than now.", constraintValidatorContext);
+                return ValidMessageUtils.returnMessage(className +".endTime is after than now.", constraintValidatorContext);
             }
         }
         if (Objects.deepEquals(start, end)) {

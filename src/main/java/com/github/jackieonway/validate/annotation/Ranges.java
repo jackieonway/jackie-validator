@@ -9,11 +9,11 @@ import com.github.jackieonway.validate.constraint.RangesConstraint;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Value range of the validation field
@@ -21,8 +21,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @author Jackie
  * @version $id: Ranges.java v 0.1 2019-10-10 10:48 Jackie Exp $$
  */
-@Target({FIELD})
-@Retention(RUNTIME)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {RangesConstraint.class})
 public @interface Ranges {
 

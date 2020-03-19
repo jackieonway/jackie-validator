@@ -7,7 +7,7 @@ import javax.validation.Payload;
 import java.lang.annotation.*;
 
 /**
- * 开始时间与结束时间比较,
+ * Check start time and end time,
  *
  * @author Jackie
  * @version \$Id: DateCompare.java, v 0.1 2019-10-13 14:26 Jackie Exp $$
@@ -25,12 +25,12 @@ public @interface DateCompare {
     boolean must() default false;
 
     /**
-     * Start time field, field starts with <i> # </i>
+     * Start time field, field starts with spel expression <i> # </i>
      */
     String startTime();
 
     /**
-     * End time field, field starts with <i> # </i>
+     * End time field, field starts with spel expression  <i> # </i>
      */
     String endTime();
 
