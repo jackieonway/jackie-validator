@@ -33,7 +33,7 @@ class ValidMessageUtils {
      *
      * @param message                    Error message
      * @param constraintValidatorContext Validator context
-     * @return 返回false直接结束校验
+     * @return Return false to end the verification directly
      */
     static boolean returnMessage(String message, ConstraintValidatorContext constraintValidatorContext) {
         validMessage(message, constraintValidatorContext);
