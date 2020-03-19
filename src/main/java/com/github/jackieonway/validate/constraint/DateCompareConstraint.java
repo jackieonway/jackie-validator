@@ -55,7 +55,7 @@ public class DateCompareConstraint implements ConstraintValidator<DateCompare, O
         if (falg) {
             return true;
         }
-        String className = DateCompare.class.getName();
+        String className = o.getClass().getSimpleName();
         if (startIsNull) {
             return ValidMessageUtils.returnMessage(className +".startTime is null.", constraintValidatorContext);
         }

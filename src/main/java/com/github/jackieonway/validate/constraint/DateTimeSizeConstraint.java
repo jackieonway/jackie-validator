@@ -59,7 +59,7 @@ public class DateTimeSizeConstraint implements ConstraintValidator<DateTimeSize,
             else if (datetime instanceof Date) {
                 date = (Date) datetime;
             } else {
-                ValidMessageUtils.validMessage(className + "date time can not parse", context);
+                ValidMessageUtils.validMessage(className + " date time can not parse", context);
                 return false;
             }
             if (date.before(startDate)) {
