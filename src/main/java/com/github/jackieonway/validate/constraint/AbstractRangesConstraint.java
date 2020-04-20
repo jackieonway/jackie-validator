@@ -15,9 +15,9 @@ import java.util.List;
 
 /**
  * @author Jackie
- * @version $id: RangesConstraint.java v 0.1 2019-10-10 10:50 Jackie Exp $$
+ * @version $id: AbstractRangesConstraint.java v 0.1 2019-10-10 10:50 Jackie Exp $$
  */
-public class RangesConstraint implements ConstraintValidator<Ranges, String> {
+public abstract class AbstractRangesConstraint<T> implements ConstraintValidator<Ranges, T> {
 
     private Ranges ranges;
 
@@ -27,11 +27,13 @@ public class RangesConstraint implements ConstraintValidator<Ranges, String> {
     }
 
     @Override
-    public boolean isValid(String param, ConstraintValidatorContext context) {
+    public boolean isValid(T param, ConstraintValidatorContext context) {
         List<String> params = Arrays.asList(ranges.params());
         if (CollectionUtils.isEmpty(params)) {
             return ValidMessageUtils.returnMessage(Ranges.class.getName() + "'s params can not be null", context);
         }
-        return params.contains(param);
+        return check(param,params);
     }
+
+    protected abstract boolean check(T param,List<String> params);
 }

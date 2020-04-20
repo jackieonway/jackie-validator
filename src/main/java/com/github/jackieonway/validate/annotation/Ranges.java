@@ -5,14 +5,15 @@
 package com.github.jackieonway.validate.annotation;
 
 
-import com.github.jackieonway.validate.constraint.RangesConstraint;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
+
+import com.github.jackieonway.validate.constraint.ranges.*;
+
+
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.TYPE_USE;
 
 
 /**
@@ -23,7 +24,8 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {RangesConstraint.class})
+@Constraint(validatedBy = {RangesConstraintForInteger.class, RangesConstraintForString.class,
+        RangesConstraintForBigDecimal.class, RangesConstraintForDouble.class, RangesConstraintForFloat.class})
 public @interface Ranges {
 
     String[] params();
@@ -33,4 +35,11 @@ public @interface Ranges {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    @interface List {
+        Ranges[] value();
+    }
 }
