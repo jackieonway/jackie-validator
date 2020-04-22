@@ -5,24 +5,27 @@
 package com.github.jackieonway.validate.annotation;
 
 
-
-import com.github.jackieonway.validate.constraint.RangesConstraint;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import com.github.jackieonway.validate.constraint.ranges.*;
+
+
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.TYPE_USE;
+
 
 /**
+ * Value range of the validation field
+ *
  * @author Jackie
  * @version $id: Ranges.java v 0.1 2019-10-10 10:48 Jackie Exp $$
  */
-@Target({FIELD})
-@Retention(RUNTIME)
-@Constraint(validatedBy = {RangesConstraint.class})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = {RangesConstraintForInteger.class, RangesConstraintForString.class,
+        RangesConstraintForBigDecimal.class, RangesConstraintForDouble.class, RangesConstraintForFloat.class})
 public @interface Ranges {
 
     String[] params();
@@ -32,4 +35,11 @@ public @interface Ranges {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+    @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    @interface List {
+        Ranges[] value();
+    }
 }

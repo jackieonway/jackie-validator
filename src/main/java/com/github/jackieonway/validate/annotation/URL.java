@@ -10,15 +10,13 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 /**
+ * Verify URL
+ *
  * @author Jackie
  * @version $id: URL.java v 0.1 2019-10-16 10:58 Jackie Exp $$
  */
-@Target({FIELD, PARAMETER})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = UrlConstraint.class)
@@ -30,8 +28,8 @@ public @interface URL {
 
     Class<? extends Payload>[] payload() default {};
 
-    @Target({FIELD, METHOD, PARAMETER, ANNOTATION_TYPE})
-    @Retention(RUNTIME)
+    @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface List {
         AllEqual[] value();

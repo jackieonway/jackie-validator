@@ -12,13 +12,14 @@ import javax.validation.ConstraintValidatorContext;
  */
 class ValidMessageUtils {
 
-    private ValidMessageUtils(){}
+    private ValidMessageUtils() {
+    }
 
     /**
-     * 返回检验结果信息
+     * Return check result information
      *
-     * @param message                    错误信息
-     * @param constraintValidatorContext 校验容器
+     * @param message                    Error message
+     * @param constraintValidatorContext Validator context
      */
     static void validMessage(String message, ConstraintValidatorContext constraintValidatorContext) {
         constraintValidatorContext.disableDefaultConstraintViolation();
@@ -28,11 +29,11 @@ class ValidMessageUtils {
 
 
     /**
-     * 返回检验结果信息
+     * Return check result information
      *
-     * @param message                    错误信息
-     * @param constraintValidatorContext 校验容器
-     * @return 返回false直接结束校验
+     * @param message                    Error message
+     * @param constraintValidatorContext Validator context
+     * @return Return false to end the verification directly
      */
     static boolean returnMessage(String message, ConstraintValidatorContext constraintValidatorContext) {
         validMessage(message, constraintValidatorContext);

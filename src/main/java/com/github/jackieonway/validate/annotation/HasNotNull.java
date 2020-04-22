@@ -12,16 +12,17 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.RetentionPolicy;
 
 /**
+ * Verify that there are non-null fields in the selected field
+ *
  * @author Jackie
  * @version $id: HasNotNull.java v 0.1 2019-10-21 14:09 Jackie Exp $$
  */
-@Target({TYPE})
-@Retention(RUNTIME)
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = HasNotNullConstraint.class)
 public @interface HasNotNull {
 
@@ -34,8 +35,8 @@ public @interface HasNotNull {
     Class<? extends Payload>[] payload() default {};
 
 
-    @Target({FIELD, METHOD, PARAMETER, ANNOTATION_TYPE})
-    @Retention(RUNTIME)
+    @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface List {
         HasNotNull[] value();

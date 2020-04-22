@@ -22,56 +22,57 @@ import java.util.Date;
  */
 public class DateTimeSizeConstraint implements ConstraintValidator<DateTimeSize, Object> {
 
-private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeSizeConstraint.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeSizeConstraint.class);
 
-   private DateTimeSize dateTimeSize;
+    private DateTimeSize dateTimeSize;
 
-   @Override
-   public void initialize(DateTimeSize constraint) {
-      this.dateTimeSize = constraint;
-   }
+    @Override
+    public void initialize(DateTimeSize constraint) {
+        this.dateTimeSize = constraint;
+    }
 
-   @Override
-   public boolean isValid(Object datetime, ConstraintValidatorContext context) {
-      String start = dateTimeSize.start();
-      String end = dateTimeSize.end();
-      if (StringUtils.isBlank(start)){
-         ValidMessageUtils.validMessage("@DateTimeSize startTime can not be null",context);
-      }
-      if (StringUtils.isBlank(end)){
-         ValidMessageUtils.validMessage("@DateTimeSize endTime can not be null",context);
-      }
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateTimeSize.pattern());
-      try {
-         Date startDate = simpleDateFormat.parse(start);
-         Date endDate = simpleDateFormat.parse(end);
-         Date date;
-         if (datetime  instanceof String){
-            if (((String) datetime).trim().length() != dateTimeSize.pattern().length()){
-               ValidMessageUtils.validMessage(
-                       String.format("@DateTimeSize param \"pattern\" maybe is \"%s\"",dateTimeSize.pattern()),context);
-               return false;
+    @Override
+    public boolean isValid(Object datetime, ConstraintValidatorContext context) {
+        String start = dateTimeSize.start();
+        String end = dateTimeSize.end();
+        String className = DateTimeSize.class.getName();
+        if (StringUtils.isBlank(start)) {
+            ValidMessageUtils.validMessage(className + ".startTime can not be null", context);
+        }
+        if (StringUtils.isBlank(end)) {
+            ValidMessageUtils.validMessage(className + ".endTime can not be null", context);
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateTimeSize.pattern());
+        try {
+            Date startDate = simpleDateFormat.parse(start);
+            Date endDate = simpleDateFormat.parse(end);
+            Date date;
+            if (datetime instanceof String) {
+                if (((String) datetime).trim().length() != dateTimeSize.pattern().length()) {
+                    ValidMessageUtils.validMessage(
+                            String.format(className + "'s param \"pattern\" maybe is \"%s\"", dateTimeSize.pattern()), context);
+                    return false;
+                }
+                date = simpleDateFormat.parse(datetime.toString());
             }
-            date = simpleDateFormat.parse(datetime.toString());
-         }
-         // 当字段为java.util.Date时，不验证pattern字段，设置失效
-         else if (datetime instanceof Date){
-            date = (Date) datetime;
-         }else {
-            ValidMessageUtils.validMessage("date time can not parse",context);
-            return false;
-         }
-         if (date.before(startDate)){
-            return false;
-         }
-         if (date.after(endDate)){
-            return false;
-         }
+            // When the field is java.util.Date, the pattern field is not validated and the setting is invalid
+            else if (datetime instanceof Date) {
+                date = (Date) datetime;
+            } else {
+                ValidMessageUtils.validMessage(className + " date time can not parse", context);
+                return false;
+            }
+            if (date.before(startDate)) {
+                return false;
+            }
+            if (date.after(endDate)) {
+                return false;
+            }
 
-      } catch (ParseException e) {
-         LOGGER.error("Jackie Validator Error : {}" , e.getMessage() , e);
-         throw new ValidatedException(e);
-      }
-      return true;
-   }
+        } catch (ParseException e) {
+            LOGGER.error("Validator Error : {}", e.getMessage(), e);
+            throw new ValidatedException(e.getMessage());
+        }
+        return true;
+    }
 }
