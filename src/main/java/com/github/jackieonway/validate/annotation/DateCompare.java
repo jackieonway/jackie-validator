@@ -25,12 +25,12 @@ public @interface DateCompare {
     boolean must() default false;
 
     /**
-     * Start time field, field starts with spel expression <i> # </i>
+     * Start time field, field starts with spel expression <i> # </i> ,eg: #order.startTime
      */
     String startTime();
 
     /**
-     * End time field, field starts with spel expression  <i> # </i>
+     * End time field, field starts with spel expression  <i> # </i> ,eg: #order.startTime
      */
     String endTime();
 
