@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class RangesConstraintForDouble extends AbstractRangesConstraint<Double> {
     @Override
     protected boolean check(Double param, List<String> params) {
-        List<Double> doubles = params.stream().map(m -> Double.valueOf(m)).collect(Collectors.toList());
+        List<Double> doubles = params.stream().map(Double::valueOf).collect(Collectors.toList());
         return doubles.contains(param);
     }
 }

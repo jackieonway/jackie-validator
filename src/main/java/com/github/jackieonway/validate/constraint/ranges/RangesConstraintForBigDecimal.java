@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class RangesConstraintForBigDecimal extends AbstractRangesConstraint<BigDecimal> {
     @Override
     protected boolean check(BigDecimal param, List<String> params) {
-        List<BigDecimal> bigDecimals = params.stream().map(m -> new BigDecimal(m)).collect(Collectors.toList());
+        List<BigDecimal> bigDecimals = params.stream().map(BigDecimal::new).collect(Collectors.toList());
         return bigDecimals.contains(param);
     }
 }

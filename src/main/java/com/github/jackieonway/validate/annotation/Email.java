@@ -37,6 +37,6 @@ public @interface Email {
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface List {
-        AllEqual[] value();
+        Email[] value();
     }
 }

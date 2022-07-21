@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class EmailConstraint implements ConstraintValidator<Email, String> {
 
-    private static final String REGEX = "^[a-zA-Z0-9\\-\\_\\#\\$\\%\\^\\&\\*\\(\\)\\?]+\\@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$";
+    private static final String REGEX = "^[a-zA-Z0-9\\-\\_\\#\\$\\%\\^\\&\\*\\(\\)\\?\\.\\@]+\\@([a-zA-Z0-9])+(\\.[a-zA-Z0-9]+)+$";
 
     @Override
     public void initialize(Email constraint) {

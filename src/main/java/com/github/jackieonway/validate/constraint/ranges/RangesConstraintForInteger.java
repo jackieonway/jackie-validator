@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class RangesConstraintForInteger extends AbstractRangesConstraint<Integer> {
     @Override
     protected boolean check(Integer param, List<String> params) {
-        List<Integer> integers = params.stream().map(m -> Integer.valueOf(m)).collect(Collectors.toList());
+        List<Integer> integers = params.stream().map(Integer::valueOf).collect(Collectors.toList());
         return integers.contains(param);
     }
 }

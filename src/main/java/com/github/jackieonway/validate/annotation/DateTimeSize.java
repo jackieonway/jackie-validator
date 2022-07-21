@@ -38,6 +38,6 @@ public @interface DateTimeSize {
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface List {
-        AllEqual[] value();
+        DateTimeSize[] value();
     }
 }

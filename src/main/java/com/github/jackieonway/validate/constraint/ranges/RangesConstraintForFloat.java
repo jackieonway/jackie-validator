@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class RangesConstraintForFloat extends AbstractRangesConstraint<Float> {
     @Override
     protected boolean check(Float param, List<String> params) {
-        List<Float> floats = params.stream().map(m -> Float.valueOf(m)).collect(Collectors.toList());
+        List<Float> floats = params.stream().map(Float::valueOf).collect(Collectors.toList());
         return floats.contains(param);
     }
 }

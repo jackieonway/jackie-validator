@@ -32,6 +32,6 @@ public @interface URL {
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @interface List {
-        AllEqual[] value();
+        URL[] value();
     }
 }
